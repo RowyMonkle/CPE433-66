@@ -297,7 +297,19 @@ namespace DNWS
                     // Get one, show some info
                     _parent.Log("Client accepted:" + clientSocket.RemoteEndPoint.ToString());
                     HTTPProcessor hp = new HTTPProcessor(clientSocket, _parent);
-                    hp.Process();
+                    
+                    // Create a new thread for each client if in Multi mode
+                    if (threadingMode.ToLower().Equals("multi"))
+                    {
+                        Thread clientThread = new Thread(new ThreadStart(hp.Process));
+                        clientThread.Start();
+                        _parent.Log("Thread " + clientThread.ManagedThreadId + " started for request processing.");
+                    }
+                    else
+                    {
+                        // Single threaded mode
+                        hp.Process();
+                    }
                 }
                 catch (Exception ex)
                 {
