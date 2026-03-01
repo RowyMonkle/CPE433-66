@@ -65,10 +65,15 @@ namespace DNWS
       return response;
     }
 
-
     public HTTPResponse PostProcessing(HTTPResponse response)
     {
       return response;
+    }
+
+    // Add timestamp to track request processing
+    private string GetTimestamp()
+    {
+      return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
     }
   }
 }
