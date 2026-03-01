@@ -1,7 +1,7 @@
 ﻿{
     "DocumentRoot": ".",
     "Port": "8080",
-    "ThreadingMode": "Single",
+    "ThreadingMode": "Multi", //change in to multiple
     "Plugins" : [
         {
             "Path" : "stat",
